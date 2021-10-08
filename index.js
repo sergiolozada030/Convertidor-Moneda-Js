@@ -63,8 +63,10 @@ function getExchangeRate() {
         .then((response) => response.json())
         .then((result) => {
             let exchangeRate = result.conversion_rates[toCurrency.value]; // valor de la moneda a convertir
-            let totalExRate = (amountVal * exchangeRate).toFixed(3); // se hace la operación de coversión
-            exchangeRateTxt.innerText = `${amountVal} ${fromCurrency.value} = ${totalExRate} ${toCurrency.value}`;
+            let totalExRate = (amountVal * exchangeRate).toFixed(2); // se hace la operación de coversión
+            exchangeRateTxt.innerText = `${new Intl.NumberFormat().format(amountVal)} ${
+                fromCurrency.value
+            } = ${new Intl.NumberFormat().format(totalExRate)} ${toCurrency.value}`;
         })
         .catch(() => {
             // validación cuando no hay internet
